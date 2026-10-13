@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.14"
 dependencies = [
     "loguru>=0.7.3",
+    "rich>=15.0.0",
     "torch>=2.14.1",
     "wtpsplit>=2.2.2",
 ]
