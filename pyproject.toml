@@ -7,7 +7,9 @@ authors = [
     { name = "Qiming Xu", email = "33349132+xqm32@users.noreply.github.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "wtpsplit>=2.2.2",
+]
 
 [project.scripts]
 whitedog = "whitedog:main"
