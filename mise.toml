@@ -4,6 +4,7 @@ uv = "latest"
 
 [tasks]
 split = "uv run scripts/split.py"
+decide = "uv run scripts/decide.py"
 
 [env]
 _.file = ".env"
