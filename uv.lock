@@ -1246,6 +1246,7 @@ dependencies = [
     { name = "loguru" },
     { name = "rich" },
     { name = "torch" },
+    { name = "typer" },
     { name = "wtpsplit" },
 ]
 
@@ -1257,6 +1258,7 @@ requires-dist = [
     { name = "loguru", specifier = ">=0.7.3" },
     { name = "rich", specifier = ">=15.0.0" },
     { name = "torch", specifier = ">=2.14.1" },
+    { name = "typer", specifier = ">=0.27.3" },
     { name = "wtpsplit", specifier = ">=2.2.2" },
 ]
 
