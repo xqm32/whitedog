@@ -13,6 +13,7 @@ dependencies = [
     "httpx2>=2.13.1",
     "loguru>=0.7.3",
     "rich>=15.0.0",
+    "stamina>=26.1.0",
     "torch>=2.14.1",
     "typer>=0.27.3",
     "wtpsplit>=2.2.2",
