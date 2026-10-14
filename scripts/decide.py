@@ -26,6 +26,7 @@ async def main():
     client = AsyncClient(
         base_url="https://openrouter.ai",
         headers={"Authorization": f"Bearer {getenv('OPENROUTER_API_KEY')}"},
+        http2=True,
     )
 
     questions = loads(await Path(questions_path).read_bytes())
