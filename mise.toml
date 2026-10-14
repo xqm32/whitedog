@@ -4,3 +4,6 @@ uv = "latest"
 
 [tasks]
 split = "uv run scripts/split.py"
+
+[env]
+_.file = ".env"
