@@ -15,7 +15,6 @@ dependencies = [
     "rich>=15.0.0",
     "stamina>=26.1.0",
     "torch>=2.14.1",
-    "typer>=0.27.3",
     "wtpsplit>=2.2.2",
 ]
 
