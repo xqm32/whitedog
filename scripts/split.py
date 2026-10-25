@@ -24,12 +24,27 @@ def main():
             logger.error(f"File does not exist: {path}")
             continue
 
-        items = loads(path.read_bytes())
-        for item in track(items):
-            item["sentences"] = model.split(item["content"])
+        if path.is_dir():
+            file_paths = []
 
-        splitted_path = path.with_stem(f"{path.stem}.splitted")
-        splitted_path.write_text(dumps(items, ensure_ascii=False))
+            for root, _, files in path.walk():
+                for file in files:
+                    file_path = root / file
+                    if file_path.suffix.lower() in (".txt"):
+                        file_paths.append(file_path)
+
+            for file_path in track(file_paths):
+                item = model.split(file_path.read_text())
+
+                splitted_path = file_path.with_suffix(".json")
+                splitted_path.write_text(dumps(item, ensure_ascii=False))
+        else:
+            items = loads(path.read_bytes())
+            for item in track(items):
+                item["sentences"] = model.split(item["content"])
+
+            splitted_path = path.with_stem(f"{path.stem}.splitted")
+            splitted_path.write_text(dumps(items, ensure_ascii=False))
 
 
 main()
