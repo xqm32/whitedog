@@ -34,17 +34,45 @@ def main():
                         file_paths.append(file_path)
 
             for file_path in track(file_paths):
-                item = model.split(file_path.read_text())
-
                 splitted_path = file_path.with_suffix(".json")
+                if splitted_path.exists():
+                    logger.warning(f"File already exists: {splitted_path}")
+                    continue
+
+                try:
+                    item = model.split(file_path.read_text())
+                except Exception:  # noqa: BLE001
+                    logger.exception(f"Failed to split file: {file_path}")
+                    continue
+
                 splitted_path.write_text(dumps(item, ensure_ascii=False))
         else:
+            splitted_path = path.with_stem(f"{path.stem}.splitted")
+            if splitted_path.exists():
+                logger.warning(f"File already exists: {splitted_path}")
+                continue
+
             items = loads(path.read_bytes())
             for item in track(items):
-                item["sentences"] = model.split(item["content"])
+                try:
+                    item["sentences"] = model.split(item["content"])
+                except Exception:  # noqa: BLE001
+                    logger.exception(f"Failed to split item: {item}")
 
-            splitted_path = path.with_stem(f"{path.stem}.splitted")
             splitted_path.write_text(dumps(items, ensure_ascii=False))
 
 
+logger.add(
+    "data/logs/split.jsonl",
+    serialize=True,
+    rotation="1 GB",
+    compression="gz",
+)
+logger.add(
+    "data/logs/split-error.jsonl",
+    level="ERROR",
+    serialize=True,
+    rotation="1 GB",
+    compression="gz",
+)
 main()
