@@ -62,6 +62,7 @@ def main():
             splitted_path.write_text(dumps(items, ensure_ascii=False))
 
 
+logger.remove()
 logger.add(
     "data/logs/split.jsonl",
     serialize=True,
